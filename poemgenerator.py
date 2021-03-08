@@ -124,7 +124,16 @@ for poet in poets:
 generated_text = my_markov.generate_text()
 print(generated_text)
 
+# replace every nth space with newline
+nthspace = 5
+cc = 1 
+textlist = list(generated_text)
+for char in range(len(textlist)):
+    if textlist[char] == " ": cc+=1
+    if cc == nthspace: 
+        textlist[char] = '\n'
+        cc = 1
 
 f = open("MyNewPoem.txt", "w")
-f.write(generated_text)
+f.write("".join(textlist))
 f.close()
