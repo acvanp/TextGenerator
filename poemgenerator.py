@@ -65,9 +65,8 @@ class MarkovChain:
       self.lookup_dict = defaultdict(list)
       self._seeded = False
       self.__seed_me()
-      
-         
-    def __seed_me(self, rand_seed=10):
+               
+    def __seed_me(self, rand_seed=None):
       if self._seeded is not True:
         try:
           if rand_seed is not None:
@@ -115,7 +114,9 @@ class MarkovChain:
         output.extend(list(context))
       return " ".join(output)
 
-my_markov = MarkovChain(100)
+
+
+my_markov = MarkovChain(mylen=140)
 
 for poet in poets:
     my_markov.add_document(poets_dict[poet])
@@ -124,3 +125,6 @@ generated_text = my_markov.generate_text()
 print(generated_text)
 
 
+f = open("MyNewPoem.txt", "w")
+f.write(generated_text)
+f.close()
