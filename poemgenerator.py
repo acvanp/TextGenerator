@@ -10,7 +10,7 @@ renaissance_poets = ['john-donne', 'william-shakespeare', 'john-milton', 'sir-th
 
 poets_dict = {}
 
-poets = modern_poets
+poets = romantic_poets
 
 for poet in poets: 
         
@@ -47,9 +47,9 @@ for poet in poets:
             results = soup.find("script",type="application/ld+json")
             #print(results.prettify())
             mess = re.findall('["genre": "poetry",\r\n                "inLanguage": "en",\r\n               ].*[\r\n                },\r\n                    {\r\n        "@id": "https://www.poemhunter.com",\r\n        "@type": "Organization",\r\n        "address":]', results.text)
-            mess = mess[24].replace('\r', '\n')
+            mess = mess[32][37:].replace('\r', '\n')
             #print(mess[25:-3])
-            poet_corpus += mess[25:-3]
+            poet_corpus += mess
 
     poets_dict[poet] = poet_corpus
 
@@ -125,7 +125,7 @@ generated_text = my_markov.generate_text()
 print(generated_text)
 
 # replace every nth space with newline
-nthspace = 5
+nthspace = 6
 cc = 1 
 textlist = list(generated_text)
 for char in range(len(textlist)):
